@@ -93,8 +93,22 @@ const ProfileSchema = new Schema({
                 type: String
             }
         }
-    ]
-    
-
-
+    ],
+    social: {
+        youtube: {
+            type: String
+        },
+        twitter: {
+            type: String
+        },
+        facebook: {
+            type: String
+        },
+        linkedin: {
+            type: String
+        },
+        instagram: {
+            type: String
+        },
+    }
 });
