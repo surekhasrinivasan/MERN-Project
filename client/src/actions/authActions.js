@@ -1,4 +1,6 @@
 import axios from 'axios';
+import setAuthToken from '../utils/setAuthToken';
+import jwt_decode from 'jwt-decode';
 import { GET_ERRORS } from './types';
 
 // Register User (redux-thunk middleware is used)
@@ -20,10 +22,14 @@ export const loginUser = userData => dispatch => {
         .then(res => { 
             // Save to localStorage
             const { token } = res.data;
-            // Sect token to localStorage
+            // Set token to localStorage
             localStorage.setItem('jwtToken', token);
             // Set token to Auth header
             setAuthToken(token);
+            // Decode token to get user data
+            const decoded = jwt_decode(token);
+            // Set current user
+            dispatch(setCurrentUser(decoded));
         })
         .catch(err =>
             dispatch({
